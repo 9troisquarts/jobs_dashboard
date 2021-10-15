@@ -1,0 +1,25 @@
+<h1 class="main-title">Logs</h1>
+<table class="full-width">
+  <thead>
+    <tr>
+      <th>Sidekiq ID</th>
+      <th>Created at</th>
+      <th>Job</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @job_logs.each do |job_log| %>
+      <tr>
+        <td><%= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid) %></td>
+        <td><%= job_log.display_created_at %></td>
+        <td><%= job_log.item_type %></td>
+        <td><%= job_log.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <%= paginate @job_logs %>
+</div>

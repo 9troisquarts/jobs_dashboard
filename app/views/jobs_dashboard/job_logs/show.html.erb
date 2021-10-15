@@ -1,0 +1,53 @@
+<%= link_to '< Back', job_logs_path %>
+<h1 class="main-title">Job #<%= @job_log.sidekiq_jid %></h1>
+
+<h2>Info:</h2>
+<p>Job: <%= @job_log.item_type %></p>
+<p>Created_at: <%= @job_log.display_created_at %></p>
+<p>Status: <%= @job_log.status %></p>
+
+<% if @job_log.args.present? %>
+  <h2>Arguments:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Arg</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @job_log.args.each do |arg| %>
+        <tr>
+          <% if arg.is_a? Hash %>
+            <td>
+              <%= arg.keys.join(', ') %>
+            </td>
+            <td>
+              <%= arg.map{|k,v| v}.join(', ') %>
+            </td>
+          <% else %>
+            <td>
+              <%= @job_log.args.index(arg) %>
+            </td>
+            <td>
+              <%= arg %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @job_log.backtrace.present? %>
+  <h2>Backtrace:</h2>
+  <div class="code">
+    <code>
+      <% @job_log.backtrace.each do |b| %>
+        <div>
+          <%= b %>
+        </div>
+      <% end %>
+    </code>
+  </div>
+<% end %>
