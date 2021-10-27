@@ -8,6 +8,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version
       t.boolean :retry, null: false, default: false
       t.string :queue
       t.text :backtrace
+      t.datetime :finished_at
       t.timestamps
     end
 

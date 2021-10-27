@@ -7,16 +7,12 @@ JobsDashboard allows you to log all of your sidekiq jobs and provides an interfa
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jobs_dashboard'
+gem 'jobs_dashboard', git: 'https://github.com/9troisquarts/jobs_dashboard'
 ```
 
 And then execute:
 
     $ bundle install
-
-Or install it yourself as:
-
-    $ gem install jobs_dashboard
 
 Run the migration generator:
 

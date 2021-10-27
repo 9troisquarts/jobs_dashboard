@@ -4,6 +4,7 @@
 <h2>Info:</h2>
 <p>Job: <%= @job_log.item_type %></p>
 <p>Created_at: <%= @job_log.display_created_at %></p>
+<p>Finished_at: <%= @job_log.display_finished_at %></p>
 <p>Status: <%= @job_log.status %></p>
 
 <% if @job_log.args.present? %>
