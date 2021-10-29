@@ -20,7 +20,7 @@ module JobsDashboard
         @logger.info("done")
         job_log.update(status: 'complete', finished_at: Time.now)
       end
-    rescue Exception
+    rescue Exception => e
       with_elapsed_time_context(start) do
         @logger.info("fail")
         job_log.update(status: 'failed', finished_at: Time.now, backtrace: ([e.message] + e.backtrace))
