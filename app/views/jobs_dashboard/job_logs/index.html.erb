@@ -3,20 +3,22 @@
   <thead>
     <tr>
       <th>Sidekiq ID</th>
+      <th>Job</th>
       <th>Created at</th>
       <th>Finished at</th>
-      <th>Job</th>
       <th>Status</th>
+      <th>Queue</th>
     </tr>
   </thead>
   <tbody>
     <% @job_logs.each do |job_log| %>
       <tr>
         <td><%= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid) %></td>
+        <td><%= job_log.item_type %></td>
         <td><%= job_log.display_created_at %></td>
         <td><%= job_log.display_finished_at %></td>
-        <td><%= job_log.item_type %></td>
         <td><%= job_log.status %></td>
+        <td><%= job_log.queue %></td>
       </tr>
     <% end %>
   </tbody>

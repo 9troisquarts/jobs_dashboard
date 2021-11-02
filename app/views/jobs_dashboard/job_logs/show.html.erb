@@ -2,10 +2,11 @@
 <h1 class="main-title">Job #<%= @job_log.sidekiq_jid %></h1>
 
 <h2>Info:</h2>
-<p>Job: <%= @job_log.item_type %></p>
-<p>Created_at: <%= @job_log.display_created_at %></p>
-<p>Finished_at: <%= @job_log.display_finished_at %></p>
-<p>Status: <%= @job_log.status %></p>
+<p>Job: <b><%= @job_log.item_type %></b></p>
+<p>Created_at: <b><%= @job_log.display_created_at %></b></p>
+<p>Finished_at: <b><%= @job_log.display_finished_at %></b></p>
+<p>Status: <b><%= @job_log.status %></b></p>
+<p>Queue: <b><%= @job_log.queue %></b></p>
 
 <% if @job_log.args.present? %>
   <h2>Arguments:</h2>
@@ -18,23 +19,27 @@
     </thead>
     <tbody>
       <% @job_log.args.each do |arg| %>
-        <tr>
-          <% if arg.is_a? Hash %>
-            <td>
-              <%= arg.keys.join(', ') %>
-            </td>
-            <td>
-              <%= arg.map{|k,v| v}.join(', ') %>
-            </td>
-          <% else %>
+        <% if arg.is_a? Hash %>
+          <%- arg.each do |k,v| %>
+            <tr>
+              <td>
+                <%= k %>
+              </td>
+              <td>
+                <%= v %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
             <td>
               <%= @job_log.args.index(arg) %>
             </td>
             <td>
               <%= arg %>
             </td>
-          <% end %>
-        </tr>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

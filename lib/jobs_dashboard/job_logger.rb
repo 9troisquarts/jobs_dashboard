@@ -5,7 +5,7 @@ module JobsDashboard
     def call(item, queue)
       start = ::Process.clock_gettime(::Process::CLOCK_MONOTONIC)
       @logger.info("start")
-      job_log = JobsDashboard::JobLog.create!(
+      @job_log = JobsDashboard::JobLog.create!(
         sidekiq_jid: item['jid'],
         status: 'queued',
         item_type: item['class'],
@@ -18,12 +18,12 @@ module JobsDashboard
 
       with_elapsed_time_context(start) do
         @logger.info("done")
-        job_log.update(status: 'complete', finished_at: Time.now)
+        @job_log.update(status: 'complete', finished_at: Time.now)
       end
     rescue Exception => e
       with_elapsed_time_context(start) do
         @logger.info("fail")
-        job_log.update(status: 'failed', finished_at: Time.now, backtrace: ([e.message] + e.backtrace))
+        @job_log.update(status: 'failed', finished_at: Time.now, backtrace: ([e.message] + e.backtrace))
       end
 
       raise
