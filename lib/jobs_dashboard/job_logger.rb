@@ -18,13 +18,11 @@ module JobsDashboard
 
       with_elapsed_time_context(start) do
         @logger.info("done")
-        @job_log = @job_log || JobsDashboard::JobLog.find_by(sidekiq_jid: item['jid'])
         @job_log.update(status: 'complete', finished_at: Time.now) if @job_log
       end
     rescue Exception => e
       with_elapsed_time_context(start) do
         @logger.info("fail")
-        @job_log = @job_log || JobsDashboard::JobLog.find_by(sidekiq_jid: item['jid'])
         @job_log.update(status: 'failed', finished_at: Time.now, backtrace: ([e.message] + e.backtrace)) if @job_log
       end
 

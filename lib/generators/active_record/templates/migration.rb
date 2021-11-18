@@ -4,10 +4,10 @@ class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version
       t.string :sidekiq_jid, :null => false
       t.string :status
       t.string :item_type
-      t.text :args
+      t.text :args, limit: 4294967295
       t.boolean :retry, null: false, default: false
       t.string :queue
-      t.text :backtrace
+      t.text :backtrace, limit: 4294967295
       t.datetime :finished_at
       t.timestamps
     end
