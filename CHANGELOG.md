@@ -1,3 +1,6 @@
+## [0.1.7] - 2022-01-28 
+- Improve dashboard performances
+
 ## [0.1.5] - 2021-11-18
 
 - Increase limit of args text field.
