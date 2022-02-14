@@ -24,6 +24,8 @@
   </tbody>
 </table>
 
+<% begin %>
 <div class="pagination">
-  <%= paginate @job_logs %>
+  <%= paginate @job_logs, theme: 'jobs_dashboard' %>
 </div>
+<% end %>

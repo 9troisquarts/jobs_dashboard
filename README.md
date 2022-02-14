@@ -31,9 +31,19 @@ Set JobsDashboard::JobLogger as sidekiq default logger
 
 ```ruby
 # initializers/sidekiq.rb
+require 'jobs_dashboard'
+
+Sidekiq.configure_client do |config|
+  # accepts :expiration (optional)
+  JobsDashboard.configure_client_middleware config
+end
+
 Sidekiq.configure_server do |config|
-  require 'jobs_dashboard/job_logger'
-  config.options[:job_logger] = JobsDashboard::JobLogger
+  # accepts :expiration (optional)
+  JobsDashboard.configure_server_middleware config
+
+  # accepts :expiration (optional)
+  JobsDashboard.configure_client_middleware config
 end
 ```
 
@@ -46,6 +56,14 @@ require 'jobs_dashboard/engine'
 Rails.application.routes.draw do
   mount JobsDashboard::Engine, at: '/jobs_dashboard'
 end
+```
+
+## Job Options
+
+Options can be specified in worker's sidekiq_options with the key jobs_dashboard
+
+```ruby
+  sidekiq_options jobs_dashboard: { skip: true }
 ```
 
 ## Development

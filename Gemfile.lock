@@ -1,0 +1,93 @@
+PATH
+  remote: .
+  specs:
+    jobs_dashboard (0.1.13)
+      kaminari
+      sidekiq (>= 6.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionview (6.1.4.6)
+      activesupport (= 6.1.4.6)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    activemodel (6.1.4.6)
+      activesupport (= 6.1.4.6)
+    activerecord (6.1.4.6)
+      activemodel (= 6.1.4.6)
+      activesupport (= 6.1.4.6)
+    activesupport (6.1.4.6)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
+    builder (3.2.4)
+    concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
+    crass (1.0.6)
+    diff-lcs (1.4.4)
+    erubi (1.10.0)
+    i18n (1.9.1)
+      concurrent-ruby (~> 1.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
+    loofah (2.14.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.5.9)
+    minitest (5.15.0)
+    nokogiri (1.13.1-x86_64-darwin)
+      racc (~> 1.4)
+    racc (1.6.0)
+    rack (2.2.3)
+    rails-dom-testing (2.0.3)
+      activesupport (>= 4.2.0)
+      nokogiri (>= 1.6)
+    rails-html-sanitizer (1.4.2)
+      loofah (~> 2.3)
+    rake (13.0.6)
+    redis (4.6.0)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.1)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.3)
+    sidekiq (6.4.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    zeitwerk (2.5.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  jobs_dashboard!
+  rake (~> 13.0)
+  rspec (~> 3.0)
+
+BUNDLED WITH
+   2.1.4
