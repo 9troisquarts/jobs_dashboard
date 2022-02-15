@@ -1,4 +1,4 @@
 JobsDashboard::Engine.routes.draw do
-  root 'job_logs#index'
+  root 'dashboard#index'
   resources :job_logs
 end

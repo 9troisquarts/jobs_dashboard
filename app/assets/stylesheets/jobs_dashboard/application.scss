@@ -1,0 +1,155 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$primary-color: #1A417E;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+$montserrat: 'Montserrat', sans-serif;
+$jet: #2D4047;
+
+@import "./variables.sass";
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: #F3F3F3;
+  font-family: $montserrat;
+  margin: 0;
+  color: $jet;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: left;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table thead th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #b1003e;
+  color: white;
+}
+
+table tbody tr:nth-child(even){background-color: #f2f2f2;}
+
+table tbody tr:hover {background-color: #ddd;}
+
+.code {
+  padding: 12px;
+  background-color: #2c3e50;
+  color: white;
+}
+
+.pagination {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.navbar {
+  min-height: 80px;
+  background-color: $primary-color;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0, .5);
+
+  > ul.nav {
+    height: 80px;
+    letter-spacing: 1px;
+    list-style: none;
+    margin: 0;
+    > li.nav-item {
+      display: inline-flex;
+      height: 80px;
+      position: relative;
+      align-items: center;
+      padding: 0 16px;
+      a {
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #FFF
+      }
+
+      &.active {
+        &::after {
+          content: " ";
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background-color: #FFF;
+          width: 50%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+.layout-content {
+  padding: 16px;
+}
+
+.page-header {
+  padding: 15px;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+.divider {
+  height: 1px;
+  background-color: #E6E6E6;
+  width: 100%;
+}
+
+h1.page-header {
+  margin: 0;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.mt-2 {
+  margin-top: 30px;
+}
+
+.text-muted {
+  color: $muted;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+@import "./modules/*";

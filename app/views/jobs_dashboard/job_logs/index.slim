@@ -1,0 +1,33 @@
+h1.page-header
+  = t :'menu.logs'
+table class="full-width"
+  thead
+    tr
+      th
+        = t(:id, scope: 'jobs_dashboard.table.headers')
+      th
+        = t(:job, scope: 'jobs_dashboard.table.headers')
+      th
+        = t(:created_at, scope: 'jobs_dashboard.table.headers')
+      th
+        = t(:finished_at, scope: 'jobs_dashboard.table.headers')
+      th
+        = t(:status, scope: 'jobs_dashboard.table.headers')
+      th
+        = t(:queue, scope: 'jobs_dashboard.table.headers')
+  tbody
+    - @job_logs.each do |job_log|
+      tr
+        td= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid)
+        td= job_log.item_type
+        td
+          - if job_log.display_created_at
+            = l job_log.display_created_at.to_time, format: :default
+        td
+          - if job_log.display_finished_at
+            = l job_log.display_finished_at.to_time, format: :default
+        td= t job_log.status, scope: 'jobs_dashboard.statuses'
+        td= job_log.queue
+
+.pagination
+  = paginate @job_logs, theme: 'jobs_dashboard'

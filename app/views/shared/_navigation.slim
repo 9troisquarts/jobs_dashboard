@@ -1,0 +1,6 @@
+.navbar
+  ul.nav
+    li.nav-item class="#{'active' if current_page?(root_path)}"
+      = link_to t(:'menu.dashboard'), root_path
+    li.nav-item class="#{'active'if current_page?(job_logs_path)}"
+      = link_to t(:'menu.logs'), job_logs_path

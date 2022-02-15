@@ -1,0 +1,18 @@
+en:
+  jobs_dashboard:
+    statuses:
+      complete: Complete
+      queued: Queued
+      failed: Failed
+      working: Working
+    menu:
+      dashboard: Dashboard
+      logs: Logs
+    table:
+      headers:
+        finished_at: Finished at
+        created_at: Created at
+        job: Job
+        id: Sidekiq ID
+        queue: Queue
+        status: Status

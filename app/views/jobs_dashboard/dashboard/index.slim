@@ -1,0 +1,35 @@
+.row
+  .col-24
+    .card.shadowed
+      .statistics
+        - [:working, :queued, :complete, :failed].each do |state|
+          .stat
+            strong
+              = @stats.select{|stat| stat[:status] === state.to_s }&.count
+            = t state, scope: :'jobs_dashboard.statuses'
+
+.row.mt-2
+  .col-12
+    .card
+      .card-title
+        = t :'jobs_dashboard.statuses.working'
+      .card-content
+        - if @ongoing_jobs.any?
+          ul.item-list
+            - @ongoing_jobs.limit(10).each do |job|
+              = render partial: 'job_row', locals: { job: job }
+        - else
+          small.text-muted
+            = t :'jobs_dashboard.sentences.no_ongoing_jobs'
+  .col-12
+    .card
+      .card-title
+        = t :'jobs_dashboard.statuses.queued'
+      .card-content
+        - if @awaiting_jobs.any?
+          ul.item-list
+            - @awaiting_jobs.limit(10).each do |job|
+              = render partial: 'job_row', locals: { job: job }
+        - else
+          small.text-muted
+            = t :'jobs_dashboard.sentences.no_awaiting_jobs'

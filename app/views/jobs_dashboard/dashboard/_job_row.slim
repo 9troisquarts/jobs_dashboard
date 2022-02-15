@@ -1,0 +1,8 @@
+li
+  div.d-flex
+    = link_to job.sidekiq_jid, job_log_path(job.sidekiq_jid)
+    small.ml-auto
+      = l job.created_at, format: :short
+
+  div
+    small.text-muted= job.item_type

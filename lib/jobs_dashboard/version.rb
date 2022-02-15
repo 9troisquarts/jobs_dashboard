@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module JobsDashboard
-  VERSION = "0.1.20"
+  VERSION = "0.1.23"
 end
