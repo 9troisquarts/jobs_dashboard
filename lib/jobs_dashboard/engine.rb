@@ -7,5 +7,12 @@ module JobsDashboard
 
     require 'slim-rails'
   end
+
+  self.mattr_accessor :additional_params
+  self.additional_params = []
+
+  def self.setup(&block)
+    yield self
+  end
 end
 

@@ -5,14 +5,16 @@
         - [:working, :queued, :complete, :failed].each do |state|
           .stat
             strong
-              = @stats.select{|stat| stat[:status] === state.to_s }&.count
+              = @stats.find{|stat| stat[:status] === state.to_s }.try(:[], :count) || 0
             = t state, scope: :'jobs_dashboard.statuses'
 
 .row.mt-2
   .col-12
     .card
       .card-title
-        = t :'jobs_dashboard.statuses.working'
+        => t :'jobs_dashboard.statuses.working'
+        - if @ongoing_jobs.count > 0
+          |(#{@ongoing_jobs.count})
       .card-content
         - if @ongoing_jobs.any?
           ul.item-list
@@ -24,7 +26,9 @@
   .col-12
     .card
       .card-title
-        = t :'jobs_dashboard.statuses.queued'
+        => t :'jobs_dashboard.statuses.queued'
+        - if @awaiting_jobs.count > 0
+          |(#{@awaiting_jobs.count})
       .card-content
         - if @awaiting_jobs.any?
           ul.item-list

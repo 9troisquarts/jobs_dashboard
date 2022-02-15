@@ -7,6 +7,8 @@ table class="full-width"
         = t(:id, scope: 'jobs_dashboard.table.headers')
       th
         = t(:job, scope: 'jobs_dashboard.table.headers')
+      - JobsDashboard.additional_params.each do |param|
+        th= param[:title]
       th
         = t(:created_at, scope: 'jobs_dashboard.table.headers')
       th
@@ -20,6 +22,9 @@ table class="full-width"
       tr
         td= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid)
         td= job_log.item_type
+        - JobsDashboard.additional_params.each do |param|
+          td
+            = job_log.try(:[], param[:attribute_name])
         td
           - if job_log.display_created_at
             = l job_log.display_created_at.to_time, format: :default

@@ -6,6 +6,7 @@ module JobsDashboard
       @awaiting_jobs = JobLog.queued
       @ongoing_jobs = JobLog.working
     end
+
   end
 
 end
