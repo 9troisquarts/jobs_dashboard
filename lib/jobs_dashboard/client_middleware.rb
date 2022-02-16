@@ -1,6 +1,5 @@
 require 'sidekiq/api'
 require 'jobs_dashboard/storage'
-JOB_CLASS = Sidekiq.constants.include?(:JobRecord) ? Sidekiq::JobRecord : Sidekiq::Job
 
 module JobsDashboard
 # Should be in the client middleware chain
@@ -39,7 +38,6 @@ module JobsDashboard
       def get_jobs_dashboard_options(msg)
         klass = msg["args"][0]["job_class"] || msg["class"] rescue msg["class"]
         job_class = klass.is_a?(Class) ? klass : Module.const_get(klass)
-        p job_class.inspect
         job_class.get_sidekiq_options['jobs_dashboard'] || {}
       end
 
