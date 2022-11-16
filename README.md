@@ -58,6 +58,10 @@ Rails.application.routes.draw do
 end
 ```
 
+## Basic authentication
+
+Set environment variable JOBS_DASHBOARD_AUTH_PASSWORD and JOBS_DASHBOARD_AUTH_USERNAME to activate the basic authentication
+
 ## Job Options
 
 Options can be specified in worker's sidekiq_options with the key jobs_dashboard
