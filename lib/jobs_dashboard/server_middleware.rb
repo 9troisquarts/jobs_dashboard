@@ -31,9 +31,13 @@ module JobsDashboard
     rescue SystemExit, Interrupt
       update_job_status worker.jid, 'interrupted'
       raise
-    rescue Exception
+    rescue Exception => e
       status = :failed
       update_job_status worker.jid, 'failed'
+      store_for_id(worker.jid, {
+        error_message: e.message,
+        backtrace: e.backtrace
+      })
       raise
     end
 

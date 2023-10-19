@@ -1,3 +1,17 @@
+## [0.2.2] - 2023-10-19
+
+- Added log of error message. Create a migration to add logging of error message:
+```
+class AddErrorMessageToJobsDashboardJobLogs < ActiveRecord::Migration[7.0]
+  def change
+    add_column :jobs_dashboard_job_logs, :error_message, :text, limit: 4294967295
+  end
+end
+```
+## [0.2.1] - 2023-10-19
+
+- Raise if basic auth params are not defined
+
 ## [0.1.7] - 2022-01-28 
 - Improve dashboard performances
 
