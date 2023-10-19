@@ -49,6 +49,7 @@
   <h2>Backtrace:</h2>
   <div class="code">
     <code>
+      <%= @job_log.error_message %>
       <% @job_log.backtrace.each do |b| %>
         <div>
           <%= b %>
