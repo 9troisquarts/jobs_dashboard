@@ -1,3 +1,6 @@
+## [2.1] - 2023-10-19
+- Raise if basic auth params are not defined
+
 ## [0.1.7] - 2022-01-28 
 - Improve dashboard performances
 
