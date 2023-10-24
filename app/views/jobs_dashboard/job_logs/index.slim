@@ -1,38 +1,89 @@
 h1.page-header
   = t :'menu.logs'
-table class="full-width"
-  thead
-    tr
-      th
-        = t(:id, scope: 'jobs_dashboard.table.headers')
-      th
-        = t(:job, scope: 'jobs_dashboard.table.headers')
-      - JobsDashboard.additional_params.each do |param|
-        th= param[:title]
-      th
-        = t(:created_at, scope: 'jobs_dashboard.table.headers')
-      th
-        = t(:finished_at, scope: 'jobs_dashboard.table.headers')
-      th
-        = t(:status, scope: 'jobs_dashboard.table.headers')
-      th
-        = t(:queue, scope: 'jobs_dashboard.table.headers')
-  tbody
-    - @job_logs.each do |job_log|
-      tr
-        td= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid)
-        td= job_log.item_type
-        - JobsDashboard.additional_params.each do |param|
-          td
-            = job_log.try(:[], param[:attribute_name])
-        td
-          - if job_log.display_created_at
-            = l job_log.display_created_at.to_time, format: :default
-        td
-          - if job_log.display_finished_at
-            = l job_log.display_finished_at.to_time, format: :default
-        td= t job_log.status, scope: 'jobs_dashboard.statuses'
-        td= job_log.queue
 
-.pagination
-  = paginate @job_logs, theme: 'jobs_dashboard'
+.row
+  .col-24
+    .card.shadowed
+      .card-title Filtres
+      .card-content
+        = search_form_for @q do |f|
+          .form-inline
+            .input
+              = f.label :sidekiq_jid_eq, t(:sidekiq_jid, scope: 'jobs_dashboard.table.headers')
+              = f.search_field :sidekiq_jid_eq
+            .input
+              = f.label :item_type_eq, t(:item_type, scope: 'jobs_dashboard.table.headers')
+              = f.select :item_type_eq,
+                      options_for_select(item_types_collection,
+                              params.dig(:q, :item_type_eq)),
+                      { include_blank: t('form.select.all') },
+                      { multiple: false }
+            .input
+              = f.label :status_eq, t(:status, scope: 'jobs_dashboard.table.headers')
+              = f.select :status_eq,
+                      options_for_select(statuses_collection,
+                              params.dig(:q, :status_eq)),
+                      { include_blank: t('form.select.all') },
+                      { multiple: false }
+            .input
+              = f.label :queue_eq, t(:queue, scope: 'jobs_dashboard.table.headers')
+              = f.select :queue_eq,
+                      options_for_select(queues_collection,
+                              params.dig(:q, :queue_eq)),
+                      { include_blank: t('form.select.all') },
+                      { multiple: false }
+            .input.group
+              = f.label :created_at_dategteq, t(:created_at, scope: 'jobs_dashboard.table.headers')
+              .d-flex
+                = f.date_field :created_at_dategteq
+                div style="margin-right: 5px; margin-left: 5px" = t('jobs_dashboard.words.to')
+                = f.date_field :created_at_datelteq
+
+            .input.group
+              = f.label :finished_at_dategteq, t(:finished_at, scope: 'jobs_dashboard.table.headers')
+              .d-flex
+                = f.date_field :finished_at_dategteq
+                div style="margin-right: 5px; margin-left: 5px" = t('jobs_dashboard.words.to')
+                = f.date_field :finished_at_datelteq
+          .form-inline.submit
+            = link_to t('jobs_dashboard.sentences.clear_filters'), job_logs_path
+            div style="margin-left: 30px"
+              = f.submit
+.row.mt-2
+  .col-24
+    table class="full-width"
+      thead
+        tr
+          th
+            = t(:sidekiq_jid, scope: 'jobs_dashboard.table.headers')
+          th
+            = t(:item_type, scope: 'jobs_dashboard.table.headers')
+          - JobsDashboard.additional_params.each do |param|
+            th= param[:title]
+          th
+            = t(:created_at, scope: 'jobs_dashboard.table.headers')
+          th
+            = t(:finished_at, scope: 'jobs_dashboard.table.headers')
+          th
+            = t(:status, scope: 'jobs_dashboard.table.headers')
+          th
+            = t(:queue, scope: 'jobs_dashboard.table.headers')
+      tbody
+        - @job_logs.each do |job_log|
+          tr
+            td= link_to job_log.sidekiq_jid, job_log_path(job_log.sidekiq_jid)
+            td= job_log.item_type
+            - JobsDashboard.additional_params.each do |param|
+              td
+                = job_log.try(:[], param[:attribute_name])
+            td
+              = display_time job_log.created_at
+            td
+              = job_log.finished_at.present? ? display_time(job_log.finished_at) : '-'
+            td
+              .status-label class=(label_status(job_log.status))
+              = t job_log.status, scope: 'jobs_dashboard.statuses'
+            td= job_log.queue
+
+    .pagination
+      = paginate @job_logs, theme: 'jobs_dashboard'

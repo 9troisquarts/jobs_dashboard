@@ -5,6 +5,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version
       t.string :status
       t.string :item_type
       t.text :args, limit: 4294967295
+      t.text :logs, limit: 4294967295
       t.boolean :retry, null: false, default: false
       t.string :queue
       t.text :error_message, limit: 4294967295

@@ -10,7 +10,7 @@
 
 .row.mt-2
   .col-12
-    .card
+    .card.shadowed
       .card-title
         => t :'jobs_dashboard.statuses.working'
         - if @ongoing_jobs.count > 0
@@ -24,7 +24,7 @@
           small.text-muted
             = t :'jobs_dashboard.sentences.no_ongoing_jobs'
   .col-12
-    .card
+    .card.shadowed
       .card-title
         => t :'jobs_dashboard.statuses.queued'
         - if @awaiting_jobs.count > 0

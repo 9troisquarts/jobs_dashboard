@@ -12,17 +12,21 @@ module JobsDashboard
     }
 
     serialize :args, Array
+    serialize :metadata, Hash
+    serialize :logs, Array
     serialize :backtrace, Array
 
     validates :sidekiq_jid, presence: true, uniqueness: true
 
-    def display_created_at
-      created_at.in_time_zone(DEFAULT_LOCAL_TIME_ZONE).strftime('%Y-%m-%d %H:%M:%S')
-    end
-
-    def display_finished_at
-      return unless finished_at
-      finished_at.in_time_zone(DEFAULT_LOCAL_TIME_ZONE).strftime('%Y-%m-%d %H:%M:%S')
+    def self.ransackable_attributes(auth_object = nil)
+      [
+        "sidekiq_jid",
+        "item_type",
+        "queue",
+        "status",
+        "created_at", 
+        "finished_at", 
+      ]
     end
   end
 end

@@ -70,6 +70,18 @@ Options can be specified in worker's sidekiq_options with the key jobs_dashboard
   sidekiq_options jobs_dashboard: { skip: true }
 ```
 
+## Add logs or metadata
+
+In the job
+```ruby
+include JobsDashboard::Worker
+# add log line
+add_job_log_line(value)
+
+# add metadata
+add_job_metadata(key, value)
+```
+
 ## Add a custom attribute
 
 Custom attribute can be added on the jobs_dashboard_job_logs table

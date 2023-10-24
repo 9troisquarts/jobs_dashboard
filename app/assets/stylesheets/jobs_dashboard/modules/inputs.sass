@@ -1,0 +1,19 @@
+.form-inline
+  display: flex
+  flex-wrap: wrap
+  &.submit
+    justify-content: flex-end
+    
+
+  > .input
+    margin-bottom: 20px
+    &:not(:last-child)
+      margin-right: 40px
+    label
+      display: block
+      margin-bottom: 5px
+    input, select
+      min-width: 150px
+    &.group
+      display: flex
+      flex-direction: column

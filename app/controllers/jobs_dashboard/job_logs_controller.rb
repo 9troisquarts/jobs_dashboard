@@ -1,8 +1,9 @@
 module JobsDashboard
   class JobLogsController < ApplicationController
     def index
-      @job_logs = JobLog.all.order(created_at: :desc)
-      @job_logs = @job_logs
+      @q = JobLog.ransack(params[:q])
+
+      @job_logs = @q.result(distinct: true).order(created_at: :desc)
       if @job_logs.respond_to?(:page)
         @job_logs = @job_logs.page(params[:page]).per(100)
       end

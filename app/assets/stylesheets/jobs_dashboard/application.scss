@@ -29,6 +29,7 @@ html {
 
 a {
   text-decoration: none;
+  color: #3F84E5;
 }
 
 body {
@@ -46,6 +47,10 @@ table {
 table td, table th {
   border: 1px solid #ddd;
   padding: 8px;
+}
+
+table tr {
+  background-color: white;
 }
 
 table thead th {
@@ -116,12 +121,11 @@ table tbody tr:hover {background-color: #ddd;}
 }
 
 .layout-content {
-  padding: 16px;
+  padding: 32px;
 }
 
 .page-header {
-  padding: 15px;
-  border-bottom: 1px solid #E6E6E6;
+  padding: 15px 0px;
 }
 
 .divider {

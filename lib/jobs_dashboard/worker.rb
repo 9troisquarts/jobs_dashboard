@@ -14,4 +14,12 @@ module JobsDashboard::Worker
     end
   end
 
+  def add_job_log_line(value)
+    add_log_for_id(jid, value)
+  end
+
+  def add_job_metadata(key, value)
+    add_metadata_for_id(jid, key, value)
+  end
+
 end

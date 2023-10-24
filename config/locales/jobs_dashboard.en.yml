@@ -1,9 +1,14 @@
 en:
+  form:
+    select:
+      all: All
   jobs_dashboard:
     statuses:
       complete: Complete
       queued: Queued
       failed: Failed
+      interrupted: Interrupted
+      retrying: Retrying
       working: Working
     menu:
       dashboard: Dashboard
@@ -13,6 +18,12 @@ en:
         finished_at: Finished at
         created_at: Created at
         job: Job
-        id: Sidekiq ID
+        sidekiq_jid: Sidekiq ID
         queue: Queue
         status: Status
+    sentences:
+      clear_filters: Clear filters
+      no_ongoing_jobs: No ongoing jobs
+      no_awaiting_jobs: No awaiting jobs
+    words:
+      to: to

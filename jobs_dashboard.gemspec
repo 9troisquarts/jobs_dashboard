@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sidekiq', '>= 6.0'
   spec.add_dependency 'kaminari'
   spec.add_dependency 'slim-rails'
+  spec.add_dependency 'ransack'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

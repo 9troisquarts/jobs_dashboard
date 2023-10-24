@@ -1,3 +1,14 @@
+## [0.3.0] - 2023-10-20
+
+- Added logs and metadata. Create a migration to add logs:
+```
+class AddLogsAndMetadataToJobsDashboardJobLogs < ActiveRecord::Migration[7.0]
+  def change
+    add_column :jobs_dashboard_job_logs, :logs, :text, limit: 4294967295
+    add_column :jobs_dashboard_job_logs, :metadata, :text, limit: 4294967295
+  end
+end
+```
 ## [0.2.2] - 2023-10-19
 
 - Added log of error message. Create a migration to add logging of error message:

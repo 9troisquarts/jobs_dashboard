@@ -1,0 +1,15 @@
+@import "../variables"
+
+.description
+  display: flex
+  justify-content: space-between
+  .item
+    .title
+      color: #b1003e
+    .value
+      margin-top: 5px
+      font-weight: bold
+  &.horizontal
+    flex-direction: column
+    .item:not(:last-child)
+      margin-bottom: 10px

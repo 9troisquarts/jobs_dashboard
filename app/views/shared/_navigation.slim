@@ -2,5 +2,5 @@
   ul.nav
     li.nav-item class="#{'active' if current_page?(root_path)}"
       = link_to t(:'jobs_dashboard.menu.dashboard'), root_path
-    li.nav-item class="#{'active'if current_page?(job_logs_path)}"
+    li.nav-item class="#{'active' if params[:controller] == 'jobs_dashboard/job_logs'}"
       = link_to t(:'jobs_dashboard.menu.logs'), job_logs_path
