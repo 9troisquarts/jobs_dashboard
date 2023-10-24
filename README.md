@@ -87,7 +87,25 @@ add_job_metadata(key, value)
 Custom attribute can be added on the jobs_dashboard_job_logs table
 
 ```ruby
-bundle exec rails g migration add_***_to_jobs_dashboard_job_logs
+include JobsDashboard::Worker
+add_log_line(message)
+```
+
+## Ajout de metadata aux jobs
+
+
+In the job
+```ruby
+include JobsDashboard::Worker
+set_metadata('USER_ID', '1')
+```
+
+## Ajout d'un attribut commun a tous les jobs
+
+Si vous souhaitez ajouter un champ a tous les jobs qui sera utilisé comme filtre / colonnes, suivez les instructions ci dessous :
+
+```ruby
+bundle exec rails g migration add_{{attribute_name}}_to_jobs_dashboard_job_logs
 ```
 
 In an initializer
