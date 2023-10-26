@@ -43,7 +43,7 @@
                       .value 
                         code = arg
 
-      - if @job_log.respond_to?(:metadata) && @job_log.metadata.any?
+      - if @job_log.respond_to?(:metadata) && @job_log.metadata.present?
         .card.shadowed
           .card-title Metadata
           .card-content.no-padding

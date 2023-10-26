@@ -1,3 +1,9 @@
+## [0.3.2] - 2023-10-26
+- Fix display when metadata is nil
+
+## [0.3.1] - 2023-10-26
+- Redesign of job_log#show
+
 ## [0.3.0] - 2023-10-20
 
 - Added logs and metadata. Create a migration to add logs:
