@@ -1,86 +1,91 @@
-= link_to '< Back', job_logs_path
-h1.page-header #{@job_log.item_type} ##{@job_log.sidekiq_jid}
+.page-container
+  .page-header
+    .back
+      = link_to '< Back', job_logs_path
+    .title #{@job_log.item_type} ##{@job_log.sidekiq_jid}
 
-.row
-  .col-24
-    .card.shadowed
-      .card-content
-        .description
-          .item
-            .title = t(:item_type, scope: 'jobs_dashboard.table.headers')
-            .value = @job_log.item_type
-          .item
-            .title = t(:created_at, scope: 'jobs_dashboard.table.headers')
-            .value = display_time(@job_log.created_at)
-          .item
-            .title = t(:finished_at, scope: 'jobs_dashboard.table.headers')
-            .value = @job_log.finished_at.present? ? display_time(@job_log.finished_at) : '-'
-          .item
-            .title = t(:status, scope: 'jobs_dashboard.table.headers')
-            .value
-              .status-label class=(label_status(@job_log.status))
-              = t @job_log.status, scope: 'jobs_dashboard.statuses'
-          .item
-            .title = t(:queue, scope: 'jobs_dashboard.table.headers')
-            .value = @job_log.queue
-
-- if @job_log.args.present?
-  .row.mt-2
-    .col-24
-      .card.shadowed
-        .card-title Arguments
-        .card-content
-          table
-            tbody
-              - @job_log.args.each do |arg|
-                - if arg.is_a? Hash
-                  - arg.each do |k,v|
-                    tr
-                      td
-                        = k
-                      td
-                        = v
-                - else
-                  tr
-                    td
-                      = @job_log.args.index(arg)
-                    td
-                      = arg
-
-- if @job_log.respond_to?(:metadata) && @job_log.metadata.any?
-  .row.mt-2
-    .col-24
-      .card.shadowed
-        .card-title Metadata
-        .card-content
-          table
-            tbody
-              - @job_log.metadata.each do |k, v|
-                  tr
-                    td
-                      = k
-                    td
-                      = v
-
-- if @job_log.respond_to?(:logs) && @job_log.logs.any?
-  .row.mt-2
-    .col-24
-      .card.shadowed
-        .card-title Logs
-        .card-content
-          .code
+  .page-body
+    .main-container
+      - if @job_log.backtrace.present?
+        .card.shadowed
+          .card-title Error message
+          .card-content
             code 
-              - @job_log.logs.each do |log|
-                div #{display_time(log[:created_at])}: #{log[:value]}
+              = @job_log.error_message
 
-- if @job_log.backtrace.present?
-  .row.mt-2
-    .col-24
+        .card.shadowed
+          .card-title Backtrace
+          .card-content
+            div style="max-height: 400px; overflow-y: auto;"
+              .code
+                code 
+                  - @job_log.backtrace.each do |b|
+                    div = b
+
+      - if @job_log.args.present?
+        .card.shadowed
+          .card-title Arguments
+          .card-content.no-padding
+            div style="max-height: 400px; overflow-y: auto;"
+              .description
+                - @job_log.args.each do |arg|
+                  - if arg.is_a? Hash
+                    - arg.each do |k,v|
+                      .item
+                        .title
+                          code = k
+                        .value
+                          code = v
+                  - else
+                    .item
+                      .title 
+                        code = @job_log.args.index(arg)
+                      .value 
+                        code = arg
+
+      - if @job_log.respond_to?(:metadata) && @job_log.metadata.any?
+        .card.shadowed
+          .card-title Metadata
+          .card-content.no-padding
+            div style="max-height: 400px; overflow-y: auto;"
+              .description
+                - @job_log.metadata.each do |k, v|
+                  .item
+                    .title
+                      code = k
+                    .value
+                      code = v
+
+      - if @job_log.respond_to?(:logs) && @job_log.logs.any?
+        .card.shadowed
+          .card-title Logs
+          .card-content.no-padding
+            div style="max-height: 400px; overflow-y: auto;"
+              .description
+                - @job_log.logs.each do |log|
+                  .item
+                    .title = display_time(log[:created_at])
+                    .value = log[:value]
+
+    .side-container
       .card.shadowed
-        .card-title Backtrace
-        .card-content
-          .code
-            code 
-              b = @job_log.error_message
-              - @job_log.backtrace.each do |b|
-                div = b
+        .card-title Infos
+        .card-content.no-padding
+          .description
+            .item
+              .title = t(:item_type, scope: 'jobs_dashboard.table.headers')
+              .value = @job_log.item_type
+            .item
+              .title = t(:created_at, scope: 'jobs_dashboard.table.headers')
+              .value = display_time(@job_log.created_at)
+            .item
+              .title = t(:finished_at, scope: 'jobs_dashboard.table.headers')
+              .value = @job_log.finished_at.present? ? display_time(@job_log.finished_at) : '-'
+            .item
+              .title = t(:status, scope: 'jobs_dashboard.table.headers')
+              .value
+                .status-label class=(status_label(@job_log.status))
+                = t @job_log.status, scope: 'jobs_dashboard.statuses'
+            .item
+              .title = t(:queue, scope: 'jobs_dashboard.table.headers')
+              .value = @job_log.queue

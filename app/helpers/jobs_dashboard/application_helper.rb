@@ -5,7 +5,7 @@ module JobsDashboard
       time.in_time_zone(DEFAULT_LOCAL_TIME_ZONE).strftime("%Y-%m-%d %I:%M:%S")
     end
 
-    def label_status status
+    def status_label status
       case status
       when 'complete'
         return 'success'

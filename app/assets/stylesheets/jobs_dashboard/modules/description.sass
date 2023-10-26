@@ -2,14 +2,16 @@
 
 .description
   display: flex
-  justify-content: space-between
+  flex-direction: column
+
   .item
+    display: flex
     .title
-      color: #b1003e
+      padding: 8px 20px
+      flex: 2
+      background: #F5F5F5
     .value
-      margin-top: 5px
-      font-weight: bold
-  &.horizontal
-    flex-direction: column
-    .item:not(:last-child)
-      margin-bottom: 10px
+      padding: 8px 20px
+      flex: 5
+    &:not(:last-child)
+      border-bottom: 1px solid $border-color

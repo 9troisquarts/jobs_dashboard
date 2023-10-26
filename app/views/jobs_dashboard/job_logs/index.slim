@@ -48,7 +48,7 @@ h1.page-header
           .form-inline.submit
             = link_to t('jobs_dashboard.sentences.clear_filters'), job_logs_path
             div style="margin-left: 30px"
-              = f.submit
+              = f.submit t('jobs_dashboard.words.submit'), class: 'button primary'
 .row.mt-2
   .col-24
     table class="full-width"
@@ -81,7 +81,7 @@ h1.page-header
             td
               = job_log.finished_at.present? ? display_time(job_log.finished_at) : '-'
             td
-              .status-label class=(label_status(job_log.status))
+              .status-label class=(status_label(job_log.status))
               = t job_log.status, scope: 'jobs_dashboard.statuses'
             td= job_log.queue
 

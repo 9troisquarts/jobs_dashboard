@@ -1,16 +1,17 @@
 .row
   .col-24
-    .card.shadowed
-      .statistics
-        - [:working, :queued, :complete, :failed].each do |state|
-          .stat
-            strong
-              = @stats.find{|stat| stat[:status] === state.to_s }.try(:[], :count) || 0
-            = t state, scope: :'jobs_dashboard.statuses'
+    .card.shadowed.full-width
+      .card-content
+        .statistics
+          - [:working, :queued, :complete, :failed].each do |state|
+            .stat
+              strong
+                = @stats.find{|stat| stat[:status] === state.to_s }.try(:[], :count) || 0
+              = t state, scope: :'jobs_dashboard.statuses'
 
 .row.mt-2
   .col-12
-    .card.shadowed
+    .card.shadowed.full-width
       .card-title
         => t :'jobs_dashboard.statuses.working'
         - if @ongoing_jobs.count > 0
@@ -24,7 +25,7 @@
           small.text-muted
             = t :'jobs_dashboard.sentences.no_ongoing_jobs'
   .col-12
-    .card.shadowed
+    .card.shadowed.full-width
       .card-title
         => t :'jobs_dashboard.statuses.queued'
         - if @awaiting_jobs.count > 0
