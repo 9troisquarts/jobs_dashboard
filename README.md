@@ -91,15 +91,6 @@ include JobsDashboard::Worker
 add_log_line(message)
 ```
 
-## Ajout de metadata aux jobs
-
-
-In the job
-```ruby
-include JobsDashboard::Worker
-set_metadata('USER_ID', '1')
-```
-
 ## Ajout d'un attribut commun a tous les jobs
 
 Si vous souhaitez ajouter un champ a tous les jobs qui sera utilisé comme filtre / colonnes, suivez les instructions ci dessous :
