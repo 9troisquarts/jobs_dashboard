@@ -15,7 +15,7 @@ module JobsDashboard
     end
 
     def item_types_collection
-      JobLog.pluck(:item_type).uniq.sort
+      JobLog.pluck(:item_type).compact.uniq.sort
     end
 
     def statuses_collection
@@ -25,7 +25,7 @@ module JobsDashboard
     end
 
     def queues_collection
-      JobLog.pluck(:queue).uniq.sort
+      JobLog.pluck(:queue).compact.uniq.sort
     end
   end
 end

@@ -1,3 +1,6 @@
+## [0.3.3] - 2023-11-07
+- Fix crash when there is data without item_type / queue
+
 ## [0.3.2] - 2023-10-26
 - Fix display when metadata is nil
 
