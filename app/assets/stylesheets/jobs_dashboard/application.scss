@@ -14,22 +14,29 @@
  *= require_self
  */
 
-$primary-color: #1A417E;
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
+$layout-content-margin-top: 8rem;
+$navbar-height: 80px;
+$white: #FFF;
+$border-radius: 0.5rem;
 $montserrat: 'Montserrat', sans-serif;
 $jet: #2D4047;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@import "reset.scss";
 @import "./variables.sass";
 
 html {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Montserrat, Helvetica, sans-serif;
   padding: 0px;
+  font-size: 14px;
+  box-sizing: border-box;
+  color: #343434;
 }
 
 a {
   text-decoration: none;
-  color: #3F84E5;
+  color: $primary-color;
 }
 
 body {
@@ -37,6 +44,7 @@ body {
   font-family: $montserrat;
   margin: 0;
   color: $jet;
+  padding-bottom: 1rem;
 }
 
 table {
@@ -58,9 +66,20 @@ table thead th {
   padding-bottom: 12px;
 }
 
-table tbody tr:nth-child(even){background-color: #f2f2f2;}
 
-table tbody tr:hover {background-color: #ddd;}
+h1, h2 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 1rem 0;
+}
+
+h2 {
+  font-size: 22px;
+  margin: 0.75rem 0;
+}
 
 .code {
   padding: 12px;
@@ -79,39 +98,61 @@ table tbody tr:hover {background-color: #ddd;}
 }
 
 .navbar {
-  min-height: 80px;
   background-color: $primary-color;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0, .5);
+  padding: 0rem 32px;
 
-  > ul.nav {
-    height: 80px;
+  .title-wrapper {
+    padding-bottom: $layout-content-margin-top;
+    padding-top: 1rem;
+    h1 {
+      color: $white;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .nav-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #a75663;
+    .logo {
+      margin-right: 2rem;
+      svg {
+        width: 40px;
+        .fa-secondary {
+          fill: $white;
+        }
+        .fa-primary {
+          fill: $primary-color;
+        }
+      }
+    }
+  }
+
+  .nav-wrapper > ul.nav {
+    display: flex;
+    height: $navbar-height;
+    gap: 16px;
+    align-items: center;
     letter-spacing: 1px;
     list-style: none;
     margin: 0;
+    padding-left: 0;
     > li.nav-item {
       display: inline-flex;
-      height: 80px;
       position: relative;
       align-items: center;
-      padding: 0 16px;
       a {
-        text-transform: uppercase;
-        font-weight: 500;
-        color: #FFF
+        font-size: 14px;
+        color: #FFF;
+        border-radius: 4px;
+        padding: 8px 12px;
+        transition: background-color 0.2s ease-in-out;
       }
 
-      &.active {
-        &::after {
-          content: " ";
-          display: block;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background-color: #FFF;
-          width: 50%;
-          margin: 0 auto;
+      &.active, &:hover {
+        a {
+          background-color: darken($primary-color, 5%);
         }
       }
     }
@@ -119,7 +160,8 @@ table tbody tr:hover {background-color: #ddd;}
 }
 
 .layout-content {
-  padding: 32px;
+  padding: 0 32px;
+  margin-top: $layout-content-margin-top * -1;
 }
 
 .page-header {
@@ -132,10 +174,8 @@ table tbody tr:hover {background-color: #ddd;}
   width: 100%;
 }
 
-h1.page-header {
-  margin: 0;
-  margin-bottom: 15px;
-  font-size: 24px;
+.mt-1 {
+  margin-top: 1rem;
 }
 
 .mt-2 {
@@ -150,9 +190,25 @@ h1.page-header {
   display: flex;
 }
 
+.mt-0 {
+  margin-top: 0;
+}
+
 .ml-auto {
   margin-left: auto;
 }
 
+.radius {
+  border-radius: 0.5rem;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
 @import "./modules/*";
-@import "./pages/**/*"
+@import "./pages/**/*";

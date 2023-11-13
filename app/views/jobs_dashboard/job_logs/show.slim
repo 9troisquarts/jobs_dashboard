@@ -1,9 +1,4 @@
 .page-container
-  .page-header
-    .back
-      = link_to '< Back', job_logs_path
-    .title #{@job_log.item_type} ##{@job_log.sidekiq_jid}
-
   .page-body
     .main-container
       - if @job_log.backtrace.present?
@@ -16,7 +11,7 @@
         .card.shadowed
           .card-title Backtrace
           .card-content
-            div style="max-height: 400px; overflow-y: auto;"
+            div.radius style="max-height: 400px; overflow-y: auto;"
               .code
                 code 
                   - @job_log.backtrace.each do |b|
@@ -26,7 +21,7 @@
         .card.shadowed
           .card-title Arguments
           .card-content.no-padding
-            div style="max-height: 400px; overflow-y: auto;"
+            div.radius style="max-height: 400px; overflow-y: auto;"
               .description
                 - @job_log.args.each do |arg|
                   - if arg.is_a? Hash
@@ -44,10 +39,10 @@
                         code = arg
 
       - if @job_log.respond_to?(:metadata) && @job_log.metadata.present?
-        .card.shadowed
+        .card.shadowed.no-padding
           .card-title Metadata
-          .card-content.no-padding
-            div style="max-height: 400px; overflow-y: auto;"
+          .card-content
+            div.radius style="max-height: 400px; overflow-y: auto;"
               .description
                 - @job_log.metadata.each do |k, v|
                   .item
@@ -60,7 +55,7 @@
         .card.shadowed
           .card-title Logs
           .card-content.no-padding
-            div style="max-height: 400px; overflow-y: auto;"
+            div.radius style="max-height: 400px; overflow-y: auto;"
               .description
                 - @job_log.logs.each do |log|
                   .item
@@ -72,6 +67,9 @@
         .card-title Infos
         .card-content.no-padding
           .description
+            .item
+              .title = t(:job_id, scope: 'jobs_dashboard.table.headers')
+              .value = @job_log.sidekiq_jid
             .item
               .title = t(:item_type, scope: 'jobs_dashboard.table.headers')
               .value = @job_log.item_type

@@ -1,6 +1,12 @@
 .navbar
-  ul.nav
-    li.nav-item class="#{'active' if current_page?(root_path)}"
-      = link_to t(:'jobs_dashboard.menu.dashboard'), root_path
-    li.nav-item class="#{'active' if params[:controller] == 'jobs_dashboard/job_logs'}"
-      = link_to t(:'jobs_dashboard.menu.logs'), job_logs_path
+  .nav-wrapper
+    .logo
+      = render 'shared/logo'
+    ul.nav
+      li.nav-item class="#{'active' if current_page?(root_path)}"
+        = link_to t(:'jobs_dashboard.menu.dashboard'), root_path
+      li.nav-item class="#{'active' if params[:controller] == 'jobs_dashboard/job_logs'}"
+        = link_to t(:'jobs_dashboard.menu.logs'), job_logs_path
+  header.title-wrapper
+    h1
+      = @title || t(:"jobs_dashboard.#{controller.controller_name}.#{controller.action_name}.title")

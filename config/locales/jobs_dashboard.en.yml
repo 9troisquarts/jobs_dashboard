@@ -3,6 +3,9 @@ en:
     select:
       all: All
   jobs_dashboard:
+    dashboard:
+      index:
+        title: Dashboard
     statuses:
       complete: Complete
       queued: Queued
