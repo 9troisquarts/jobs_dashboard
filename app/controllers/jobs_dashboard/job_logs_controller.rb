@@ -11,6 +11,7 @@ module JobsDashboard
 
     def show
       @job_log = JobLog.find_by(sidekiq_jid: params[:id])
+      @title = "#{@job_log.item_type}"
     end
   end
 end

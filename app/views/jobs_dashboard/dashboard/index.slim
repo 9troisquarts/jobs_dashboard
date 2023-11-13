@@ -9,7 +9,7 @@
                 = @stats.find{|stat| stat[:status] === state.to_s }.try(:[], :count) || 0
               = t state, scope: :'jobs_dashboard.statuses'
 
-.row.mt-2
+.row.mt-1
   .col-12
     .card.shadowed.full-width
       .card-title
