@@ -2,31 +2,34 @@ module JobsDashboard
   DEFAULT_LOCAL_TIME_ZONE = 'Europe/Paris'
 
   class JobLog < ApplicationRecord
-    enum status: {
-      queued: 'queued',
-      working: 'working',
-      retrying: 'retrying',
-      complete: 'complete',
-      failed: 'failed',
-      interrupted: 'interrupted'
-    }
-
-    serialize :args, Array
-    serialize :metadata, Hash
-    serialize :logs, Array
-    serialize :backtrace, Array
-
+    if defined? Mongoid
+      include JobsDashboard::MongoidConcern
+    else
+      include JobsDashboard::ActiveRecordConcern
+    end  
+    
     validates :sidekiq_jid, presence: true, uniqueness: true
+    validates :status, inclusion: { in: %w[queued working retrying complete failed interrupted dead] }
+    
+    
+    scope :queued, -> { where(status: 'queued' )}
+    scope :working, -> { where(status: 'working' )}
+    scope :retrying, -> { where(status: 'retrying' )}
+    scope :complete, -> { where(status: 'complete' )}
+    scope :failed, -> { where(status: 'failed' )}
+    scope :dead, -> { where(status: 'dead' )}
+    scope :interrupted, -> { where(status: 'interrupted' )}
 
-    def self.ransackable_attributes(auth_object = nil)
-      [
-        "sidekiq_jid",
-        "item_type",
-        "queue",
-        "status",
-        "created_at", 
-        "finished_at", 
-      ]
+    def self.statuses
+      {
+        queued: 'queued',
+        working: 'working',
+        retrying: 'retrying',
+        complete: 'complete',
+        failed: 'failed',
+        interrupted: 'interrupted',
+        dead: 'dead',
+      }
     end
   end
 end

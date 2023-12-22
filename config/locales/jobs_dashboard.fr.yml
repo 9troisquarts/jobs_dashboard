@@ -16,6 +16,7 @@ fr:
       interrupted: Interrompu
       retrying: Nouvelle tentative
       working: En cours
+      dead: Mortes
     menu:
       dashboard: Dashboard
       logs: Job logs
