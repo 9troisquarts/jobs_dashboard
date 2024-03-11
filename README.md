@@ -35,6 +35,8 @@ require 'jobs_dashboard'
 
 Sidekiq.configure_client do |config|
   # accepts :expiration (optional)
+  JobsDashboard.configure_server_middleware config
+  # accepts :expiration (optional)
   JobsDashboard.configure_client_middleware config
 end
 
@@ -74,21 +76,18 @@ Options can be specified in worker's sidekiq_options with the key jobs_dashboard
 
 In the job
 ```ruby
-include JobsDashboard::Worker
-# add log line
-add_job_log_line(value)
+class MyJob
+  include Sidekiq::Worker
+  include JobsDashboard::Worker
 
-# add metadata
-add_job_metadata(key, value)
-```
+  def perform
+    # add log line
+    add_job_log_line(value)
 
-## Add a custom attribute
-
-Custom attribute can be added on the jobs_dashboard_job_logs table
-
-```ruby
-include JobsDashboard::Worker
-add_log_line(message)
+    # add metadata
+    add_job_metadata(key, value)
+  end
+end
 ```
 
 ## Ajout d'un attribut commun a tous les jobs
