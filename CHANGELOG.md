@@ -1,3 +1,6 @@
+## [0.3.5] - 2025-04-08
+- Add compatibility to rails 7.2
+
 ## [0.3.3] - 2023-11-07
 - Fix crash when there is data without item_type / queue
 
