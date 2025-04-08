@@ -3,6 +3,12 @@ fr:
     select:
       all: Tout
   jobs_dashboard:
+    job_logs:
+      index:
+        title: Job logs
+    dashboard:
+      index:
+        title: Dashboard
     statuses:
       complete: Terminé
       queued: En attente
@@ -12,12 +18,13 @@ fr:
       working: En cours
     menu:
       dashboard: Dashboard
-      logs: Logs
+      logs: Job logs
     table:
       headers:
         finished_at: Terminé le
         created_at: Créé le
         item_type: Job
+        job_id: Sidekiq ID
         sidekiq_jid: Sidekiq ID
         queue: File
         status: Statut
