@@ -11,11 +11,11 @@ module JobsDashboard
       interrupted: 'interrupted'
     }
 
-    if ActiveRecord.version >= Gem::Version.new('7.0')
-      attribute :args, :serialized, coder: Array
-      attribute :metadata, :serialized, coder: Hash
-      attribute :logs, :serialized, coder: Array
-      attribute :backtrace, :serialized, coder: Array
+    if ActiveRecord.version >= Gem::Version.new('7.1')
+      serialize :args, coder: Array
+      serialize :metadata, coder: Hash
+      serialize :logs, coder: Array
+      serialize :backtrace, coder: Array
     else
       serialize :args, Array
       serialize :metadata, Hash
