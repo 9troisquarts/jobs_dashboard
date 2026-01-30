@@ -1,3 +1,6 @@
+## [0.3.7] - 2025-04-08
+- Fix rails 7.2 compatibility
+
 ## [0.3.6] - 2025-04-08
 - Fix compatibility with rails 7.0 / 7.1 / 7.2 for version 0.3.5
 

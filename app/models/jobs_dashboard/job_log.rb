@@ -12,10 +12,10 @@ module JobsDashboard
     }
 
     if ActiveRecord.version >= Gem::Version.new('7.1')
-      serialize :args, coder: Array
-      serialize :metadata, coder: Hash
-      serialize :logs, coder: Array
-      serialize :backtrace, coder: Array
+      serialize :args, coder: YAML, type: Array
+      serialize :metadata, coder: YAML, type: Hash
+      serialize :logs, coder: YAML, type: Array
+      serialize :backtrace, coder: YAML, type: Array
     else
       serialize :args, Array
       serialize :metadata, Hash
