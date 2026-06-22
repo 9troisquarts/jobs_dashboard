@@ -2,14 +2,20 @@ module JobsDashboard
   DEFAULT_LOCAL_TIME_ZONE = 'Europe/Paris'
 
   class JobLog < ApplicationRecord
-    enum status: {
+    STATUSES = {
       queued: 'queued',
       working: 'working',
       retrying: 'retrying',
       complete: 'complete',
       failed: 'failed',
       interrupted: 'interrupted'
-    }
+    }.freeze
+
+    if ActiveRecord.version >= Gem::Version.new('7.1')
+      enum :status, STATUSES
+    else
+      enum status: STATUSES
+    end
 
     if ActiveRecord.version >= Gem::Version.new('7.1')
       serialize :args, coder: YAML, type: Array

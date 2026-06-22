@@ -1,3 +1,6 @@
+## [0.3.8] - 2026-06-22
+- Fix Rails 8 compatibility: use `enum :status, { ... }` syntax
+
 ## [0.3.7] - 2025-04-08
 - Fix rails 7.2 compatibility
 
