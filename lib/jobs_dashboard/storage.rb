@@ -2,6 +2,14 @@ module JobsDashboard::Storage
 
   protected
 
+  def clear_active_connections!
+    if ActiveRecord::Base.respond_to?(:clear_active_connections!)
+      ActiveRecord::Base.clear_active_connections!
+    else
+      ActiveRecord::Base.connection_handler.clear_active_connections!
+    end
+  end
+
   # Stores job log in database
   # sets last update time
   # @param [String] id job id
@@ -15,7 +23,7 @@ module JobsDashboard::Storage
         @job_log.save
       end
     ensure
-      ActiveRecord::Base.clear_active_connections!
+      clear_active_connections!
     end
   end
 
@@ -35,7 +43,7 @@ module JobsDashboard::Storage
         @job_log.save
       end
     ensure
-      ActiveRecord::Base.clear_active_connections!
+      clear_active_connections!
     end
   end
 
@@ -47,7 +55,7 @@ module JobsDashboard::Storage
         @job_log.save
       end
     ensure
-      ActiveRecord::Base.clear_active_connections!
+      clear_active_connections!
     end
   end
 

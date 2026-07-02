@@ -1,3 +1,6 @@
+## [0.3.9] - 2026-06-22
+- Fix Rails 7.2+ compatibility: use `connection_handler.clear_active_connections!`
+
 ## [0.3.8] - 2026-06-22
 - Fix Rails 8 compatibility: use `enum :status, { ... }` syntax
 
